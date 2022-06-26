@@ -1,0 +1,103 @@
+
+<head>
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; img-src https://* 'self' data:;
+  connect-src http://54.159.203.144/"> -->
+</head>
+
+<div style="text-align:center">
+  <h2>Fetch Details</h2>
+
+  <table  border="0"  class="prodDrp">
+    <tbody>
+      <tr>
+        <td class="txt" >Product</td>  
+        <td>  
+          <select class='drpdwn' #mySelect    (change)='onOptionsSelected(mySelect.value)'>     
+          <option>Select Product</option>  
+          <option class='option'    *ngFor='let prod of products|async' 
+            [value]="prod.productId">{{prod.productName}}</option>
+        </select> 
+       </td>   
+      </tr>
+    </tbody>
+  </table>    
+    
+
+    <div *ngFor="let prod of result|async; let i = index">
+      <div *ngIf="i < 1">
+        <table  border="0"  class="prodDet">
+          <tbody>
+            <tr>
+              <td class="txt" >Product Name</td>
+              <td class="empty" ></td>
+              <td class="prod">{{prod.productName}} </td>
+            </tr>
+            <tr>
+              <td class="txt" >Short Description</td>
+              <td class="empty" ></td>
+              <td class="prod">{{prod.shortDescription}} </td>
+            </tr>
+            <tr></tr>
+            <tr>
+              <td class="txt">Detailed Description</td>
+              <td class="empty" ></td>
+              <td class="prod">{{prod.detailedDescription}} </td>
+            </tr>
+            <tr></tr>
+            <tr>
+              <td class="txt">Category</td>
+              <td class="empty" ></td>
+              <td class="prod">{{prod.category}} </td>
+            </tr>
+            <tr></tr>
+            <tr>
+              <td class="txt">Starting Price</td>
+              <td class="empty" ></td>
+              <td class="prod">{{prod.startingPrice}} </td>
+            </tr>
+            <tr></tr>
+            <tr>
+              <td class="txt">Bid End Date</td>
+              <td class="empty" ></td>
+              <td class="prod">{{prod.bidEndDate}} </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+         <div> 
+           <h2 class="h2">Bids</h2>         
+         </div>
+      </div>
+    </div>
+  
+   
+    <div> 
+      <table border="0" style="width:100%" id="#bidData">
+        <thead *ngIf="(result | async)">
+          <th class="empty" ></th>
+          <th class="th">Bid Amount</th>
+          <th class="empty" ></th>
+          <th class="th">Name</th>
+          <th class="empty" ></th>
+          <th class="th">Email</th>
+          <th class="empty" ></th>
+          <th class="th">Mobile</th>
+          <th class="empty" ></th>
+        </thead>
+       <tbody>
+          <tr *ngFor="let prod of result|async">
+            <td class="empty" ></td>
+            <td class="td">{{ prod.bidAmount }}</td>
+            <td class="empty" ></td>
+            <td class="td">{{ prod.buyerFirstName }}</td>
+            <td class="empty" ></td>
+            <td class="td">{{ prod.email }}</td>
+            <td class="empty" ></td>
+            <td class="td"> {{ prod.mobile }}</td>
+            <td class="empty" ></td>
+          </tr>
+      </tbody>
+      </table>
+    </div>
+</div>
