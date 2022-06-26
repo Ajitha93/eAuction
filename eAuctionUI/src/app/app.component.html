@@ -1,9 +1,0 @@
-<div style="text-align:center">
-  <h1>About me</h1>
-  <div *ngIf="result$ | async as result">
-    <!-- <div>Name: {{ result.name }}</div><br> -->
-    <div>Name: {{ result.data.employee_name }}</div><br>
-    <!-- <img [src]="result.avatar_url" alt="me"> -->
-  </div>
-  <div *ngIf="!(result$ | async)">Loading..</div>
-</div>
