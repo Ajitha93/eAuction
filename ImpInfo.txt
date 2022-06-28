@@ -1,0 +1,124 @@
+Account URL: https://techademy.in/cognizantsrfse
+Username: Gangineni.Ajitha@cognizant.com
+Password: 90e34a87dc114513
+
+https://iihtedu.cloud.builder.ai/
+Gangineni Ajitha	
+gangineni.ajitha@mml.local
+z_jzyvKo
+
+elkuser
+Elkpass@123
+
+http://18.206.235.96:5601/ (Kibana server host url)
+
+npm run ng serve
+minify the css and js ng -build prod (dist) for performance
+Whitelisting local host domain in the ContentSecurityPolicy to vaoid xssscript attacks
+
+ELK Stack Configuration in windows machine:
+Refer: https://medium.com/geekculture/building-logging-system-in-microservice-architecture-with-elk-stack-and-serilog-net-core-part-2-2643dbbf3c2c
+(Elastic Search cert generation required while installation)
+./elasticsearch-certutil ca
+./elasticsearch-certutil cert --ca elastic-stack-ca.p12
+Refer link for more details:https://stackoverflow.com/questions/67108012/where-does-elasticsearch-certificates-located
+
+
+.\bin\elasticsearch.bat (Check postman ElasticSearch for testing)
+.\bin\kibana.bat (check http://172.18.15.113:5601 for testing)
+.\bin\logstash.bat -f testlog.conf (check for testing http://172.18.15.113:28080/)
+
+
+.\bin\windows\zookeeper-server-start.bat  config\zookeeper.properties
+.\bin\windows\kafka-server-start.bat config\server.properties
+
+.\bin\windows\kafka-topics.bat --create --topic bids --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+.\bin\windows\kafka-topics.bat --create --topic bidlist --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+.\bin\windows\kafka-topics.bat --create --topic biddata --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
+.\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+
+.\bin\windows\kafka-topics.bat --create --zookeeper  localhost:2181 --replication-factor 1  --partitions 1 --topic test
+.\bin\windows\kafka-topics.bat --list    --zookeeper localhost:2181
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning
+
+shutdown
+.\bin\windows\zookeeper-server-stop.bat
+.\bin\windows\kafka-server-stop.bat
+
+{
+    "data" : "4e6e37e8-6a6f-47f2-9041-673c0d7a04ac"
+}
+
+
+{
+  "ProductId" :"4e6e37e8-6a6f-47f2-9041-673c0d7a04ac",
+  "ProductName": "Oil Painting",
+  "ShortDescription": "Painting desc",
+  "DetailedDescription": "Painting detailed desc",
+  "Category": "Painting",
+  "StartingPrice": "100",
+  "BidEndDate": "2022-07-27T04:24:41.297Z",
+  "FirstName": "Ajitha",
+  "LastName": "Gangineni",
+  "Address": "Elden street",
+  "City": "Toronto",
+  "State": "ON",
+  "Pin": "L5M6N6",
+  "Phone": "5436783421",
+  "Email": "aj@gmail.com"
+}
+
+
+{
+  "BuyerId":"0a7e0006-a04e-4bc4-b95f-f4f760abd6c9",
+  "FirstName": "Ashaa",
+  "LastName": "Gangineni",
+  "Address": "Graham Street",
+  "City": "Chicago",
+  "State": "IL",
+  "Pin": "60080",
+  "Phone": "3452123423",
+  "Email": "an@gmail.com",
+  "ProductId": "4e6e37e8-6a6f-47f2-9041-673c0d7a04ac",
+  "BidAmount": "1300"
+}
+
+{
+  "buyerId": "string",
+  "firstName": "Asha",
+  "lastName": "Nuthalapati",
+  "address": "Graham Street",
+  "city": "Chicago",
+  "state": "IL",
+  "pin": "60080",
+  "phone": "3452123423",
+  "email": "an@gmail.com",
+  "productId": "400ed6fa-1180-44e7-9b0e-c8327fdc0ee0",
+  "bidAmount": 100
+}
+
+{
+ 
+  "email": "an@gmail.com",
+  "productId": "400ed6fa-1180-44e7-9b0e-c8327fdc0ee0",
+  "bidAmount": 500
+}
+
+//Xss Cross site scripting attacks
+//https://localhost:44383/show-bids/400ed6fa-1180-44e7-9b0e-c8327fdc0ee0?query=%3Cscript%3Ealert(%22test%22);%3C/script%3E
+
+CORS Implementation (broken Access contorl)
+Rate Limiting (Brute force)
+
+Tag Immutability npt enabled for image as we are testing the application now
+
+AWS Usecase1 Flow: (Delete Product)
+API Gateway-> SQS -> GetProduct Lambda (Automation Triggering is not working) -> AWS Step Function-> DeleteProductLambda-> SNS(Email)
+Buyer Service Flow: 
+Hosted using Elatic Bean Stalk -> connected to Mongo DB server
+Seller Service Flow:
+ALB->ECS Fragate->Mongo DB server
+UI Use case:
+Route53-> EC2 ->S3(build) -> ALB->ECS Fragate->Mongo DB server
+            
+https://www.whois.com/whois/abhagam.com

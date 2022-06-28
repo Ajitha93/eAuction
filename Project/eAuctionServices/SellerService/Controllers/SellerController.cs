@@ -23,7 +23,7 @@ namespace SellerService.Controllers
     {
         private readonly ILogger _logger;
         private readonly ISellerBusinessManager _sellerBusinessManager;
-        private readonly string bootstrapServers = "localhost:9092";
+        private readonly string bootstrapServers = "172.31.30.197:9092";
         private readonly string topic = "bidlist";
 
         public SellerController(ILoggerFactory logger, ISellerBusinessManager sellerBusinessManager)
@@ -32,7 +32,7 @@ namespace SellerService.Controllers
             _sellerBusinessManager = sellerBusinessManager;
         }
 
-        private string SendBidRequest(string topic, string message)
+        private async Task<bool> SendBidRequest(string topic, string message)
         {
             ProducerConfig config = new ProducerConfig
             {
@@ -42,33 +42,39 @@ namespace SellerService.Controllers
 
             try
             {
-                using (var producer = new ProducerBuilder<Null, string>(config).Build())
+                using (var producer = new ProducerBuilder
+               <Null, string>(config).Build())
                 {
-                    var result =  producer.ProduceAsync
+                    var result = await producer.ProduceAsync
                     (topic, new Message<Null, string>
                     {
                         Value = message
                     });
+
+                  
+                return await Task.FromResult(true);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error occured: {ex.Message}");
             }
-            return "";
+            //return "";
+            return await Task.FromResult(false);
         }
 
         [HttpGet]
         [Route("/show-bids/{productId}")]
         [EnableCors("AllowOrigin")]
-        public IActionResult Get([FromRoute]string productId,[FromQuery] BidDataParameters bidDataParameters)
+        public async Task<IActionResult> Get([FromRoute]string productId
+            ,[FromQuery] BidDataParameters bidDataParameters)
         {
             try
             {
                 _logger.LogInformation("Show-bids method called");
                 bidDataParameters.productId = productId;
                 var message = JsonSerializer.Serialize(bidDataParameters);
-                SendBidRequest(topic, message);
+                var res=await SendBidRequest(topic, message);
                 return Ok(_sellerBusinessManager.GetBidData(bidDataParameters));
             }
             catch(Exception ex)

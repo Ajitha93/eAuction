@@ -15,7 +15,7 @@ namespace BuyerServiceConsumer
     {
         private readonly string topic = "bids";
         private readonly string groupId = "bids_group";
-        private readonly string bootstrapServers = "localhost:9092";
+        private readonly string bootstrapServers = "172.31.30.197:9092";
         private readonly IBuyerBusinesManager _buyerBusinesManager;
 
         public BuyerConsumerService(IBuyerBusinesManager buyerBusinesManager)

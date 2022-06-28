@@ -18,7 +18,7 @@ namespace BuyerService.Controllers
     public class BuyerController : ControllerBase
     {
         private readonly IBuyerBusinesManager _buyerBusinesManager;
-        private readonly string bootstrapServers = "localhost:9092";
+        private readonly string bootstrapServers = "172.31.30.197:9092";
         private readonly string topic = "bids";
 
         public BuyerController( IBuyerBusinesManager buyerBusinesManager)
@@ -57,7 +57,7 @@ namespace BuyerService.Controllers
 
         [HttpPost]
         [Route("/place-bid")]
-        public IActionResult AddBuyer(BidDetails newBid)
+        public async Task<IActionResult> AddBuyer(BidDetails newBid)
         {
             string message = string.Empty;
             try
@@ -71,10 +71,10 @@ namespace BuyerService.Controllers
                     if (message == "valid")
                     {
                         #region Kafka
-                        //    message = JsonSerializer.Serialize(newBid);
-                        //    return Ok(await SendBuyerRequest(topic, message));
+                        message = JsonSerializer.Serialize(newBid);
+                        return Ok(await SendBuyerRequest(topic, message));
                         #endregion
-                        message=_buyerBusinesManager.CreateBid(newBid);
+                        //message=_buyerBusinesManager.CreateBid(newBid);
                     }
                 }
 

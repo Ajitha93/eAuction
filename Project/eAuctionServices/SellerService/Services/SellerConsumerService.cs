@@ -12,7 +12,7 @@ namespace SellerService.Services
 {
     public class SellerConsumerService : IHostedService
     {
-        private readonly string bootstrapServers = "localhost:9092";
+        private readonly string bootstrapServers = "172.31.30.197:9092";
         private readonly string topic2 = "biddata";
         private readonly string groupId2 = "biddata_group";
 

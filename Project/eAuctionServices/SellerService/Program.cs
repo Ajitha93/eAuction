@@ -19,7 +19,7 @@ namespace SellerService
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Error()
                 .MinimumLevel.Information()
-                .WriteTo.Http("http://172.18.15.113:28080/", queueLimitBytes: null)
+                .WriteTo.Http("http://172.31.30.197:28080/", queueLimitBytes: null)
                 .CreateLogger();
 
             CreateHostBuilder(args).Build().Run();
